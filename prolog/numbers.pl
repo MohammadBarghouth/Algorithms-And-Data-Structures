@@ -22,4 +22,23 @@ multiply(X, s(0), X).
 multiply(_, 0, 0).
 multiply(X, s(Y), Z) :- multiply(X, Y, PZ), add(X, PZ, Z).
 
+plus(0,X,X).
+plus(s(X),Y,s(Z)) :- plus(X,Y,Z).
+plus(p(X),Y,p(Z)) :- plus(X,Y,Z).
 
+normalize(0,0).
+normalize(s(X),s(s(Y))) :- normalize(X,s(Y)).
+normalize(s(X),Y) :- normalize(X,p(Y)).
+normalize(s(X),s(0)) :- normalize(X,0).
+normalize(p(X),p(p(Y))) :- normalize(X,p(Y)).
+normalize(p(X),Y) :- normalize(X,s(Y)).
+normalize(p(X),p(0)) :- normalize(X,0).
+
+normalize2(X,Y) :- norm(X,0,Y).
+norm(0,X,X).
+norm(p(X),0,Z) :- norm(X,p(0),Z).
+norm(p(X),s(Y),Z) :- norm(X,Y,Z).
+norm(p(X),p(Y),Z) :- norm(X,p(p(Y)),Z).
+norm(s(X),0,Z) :- norm(X,s(0),Z).
+norm(s(X),s(Y),Z) :- norm(X,s(s(Y)),Z).
+norm(s(X),p(Y),Z) :- norm(X,Y,Z).
