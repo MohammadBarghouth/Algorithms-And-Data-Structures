@@ -324,14 +324,10 @@ public class List<T> {
     }
 
     public static <T> List<T> reverse(List<T> node){
-        if(node == null) return null;
         List<T> reversedList = null;
 
         while(node != null){
-            final List<T> copyNode = new List<>(node.value, null);
-            copyNode.next = reversedList;
-            reversedList = copyNode;
-
+            reversedList = new List<>(node.value, reversedList);
             node = node.next;
         }
 
